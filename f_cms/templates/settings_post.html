@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section mt-4">
+    <div class="row">
+        <form class="col me-4" method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <fieldset class="form-group col">
+                    <legend>{{ legend }}</legend>
+                    <p class="border-bottom mb-4">{{ caption }}</p>
+                    <div class="form-group">
+                        {{ form.title.label(class="form-control-label") }} <span style="color: #dc3545;">*</span>
+        
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.title(class="form-control form-control mb-2") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.content.label(class="form-control-label") }} <span style="color: #dc3545;">*</span>
+        
+                        {% if form.content.errors %}
+                            {{ form.content(class="form-control form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.content(class="form-control form-control mb-2") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="formFile" class="form-label">Choose a Title Image<i class="bi bi-pencil ms-2"></i> <span style="color: #dc3545;">*</span></label>
+                        <div>
+                            {{ form.title_image(class="form-control") }}
+                            {% if form.title_image.errors %}
+                                {% for error in form.title_image.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 1<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_1(class="form-control") }}
+                                {% if form.image_1.errors %}
+                                    {% for error in form.image_1.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 2<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_2(class="form-control") }}
+                                {% if form.image_2.errors %}
+                                    {% for error in form.image_2.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 3<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_3(class="form-control") }}
+                                {% if form.image_3.errors %}
+                                    {% for error in form.image_3.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 4<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_4(class="form-control") }}
+                                {% if form.image_4.errors %}
+                                    {% for error in form.image_4.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 5<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_5(class="form-control") }}
+                                {% if form.image_5.errors %}
+                                    {% for error in form.image_5.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="formFile" class="form-label">Create Image 6<i class="bi bi-pencil ms-2"></i></label>
+                                {{ form.image_6(class="form-control") }}
+                                {% if form.image_6.errors %}
+                                    {% for error in form.image_6.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-dark mt-4 mb-2") }}
+                </div>
+            </div>
+        </form>
+        <div class="view col-md-6 bg-dark p-0" style="height: 660px; border-radius: 20px;">
+                <img src="{{url_for('static', filename='f_cms_logo.svg')}}" alt="" width="150">
+                <p style="color: white;">{{ title_image }}</p>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

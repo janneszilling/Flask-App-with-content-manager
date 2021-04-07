@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+    <div class="mt-4">
+        <table class="table table-borderless table-striped m-auto">
+            <thead>
+                <tr style="font-size: 12px; text-transform: uppercase;">
+                  <th class="col-1" scope="col">ID</th>
+                  <th class="col-3" scope="col">Post</th>
+                  <th class="col-7" scope="col">Author</th>
+                  <th class="col-1" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for post in posts %}
+                  <tr>
+                    <td class="vertical-center">#{{ post.id }}</td>
+                    <td class="vertical-center">
+                        <img class="sm-acc-img me-2" src="{{ url_for('static', filename='post_images/' + post.title_image) }}">
+                        <a href="{{ url_for('post', post_id=post.id)}}">{{ post.title }}</a>
+                    </td>
+                    <td class="vertical-center">
+                        <img class="rounded-circle sm-acc-img me-2" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                        {{ post.author.username }}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger btn-sm col-md-auto" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash me-2"></i>Delete</button>
+                    </td>
+                  </tr>
+              </tbody>
+        </table>
+    </div>
+        <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete this Post?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Do you want to delete the post: <b>{{post.title}}</b>?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

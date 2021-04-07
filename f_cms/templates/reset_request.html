@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block login %}
+<div class="content-section">
+    <main class="form-signin">
+        <img class="mb-2" src="{{ url_for('static', filename='f_cms_logo_dark.svg') }}" width="50" alt="" style="display: block; margin: 0 auto;">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <h1 class="h3 mb-3 fw-normal" style="text-align: center;">Reset Password</h1>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+    
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control mb-2") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="w-100 btn btn-dark mt-3 mb-2") }}
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section mt-4">
+    <div class="mb-4">
+            <h2>Users</h2>
+    </div>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <h3>Add a new user</h3>
+        <fieldset class="form-group row g-3">
+            <div class="col-md-4">
+                {{ form.username.label(class="form-label") }}
+
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                {{ form.email.label(class="form-label") }}
+
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                {{ form.password.label(class="form-label") }}
+
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="col-md-1 align-self-end" style="text-align: right;">
+                    {{ form.submit(class="btn btn-success") }}
+            </div>
+        </fieldset>
+    </form>
+    <div class="mt-4 row">
+        <table class="table table-borderless table-striped m-auto">
+            <thead>
+                <tr style="font-size: 12px; text-transform: uppercase;">
+                  <th class="col-1" scope="col">ID</th>
+                  <th class="col-3" scope="col">User</th>
+                  <th class="col-7" scope="col">Email</th>
+                  <th class="col-1" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for user in users %}
+                  <tr>
+                    <td class="vertical-center">#{{ user.id }}</td>
+                    <td class="vertical-center">
+                        <img class="rounded-circle sm-acc-img me-2" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+                        {{ user.username }}
+                    </td>
+                    <td class="vertical-center">{{ user.email }}</td>
+                    <td style="text-align: left;">
+                        <form action="{{ url_for('delete_user', user_id=user.id)}}" method="POST">
+                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash me-2"></i>Delete</button>
+                        </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
